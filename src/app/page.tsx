@@ -4,7 +4,7 @@ import ConectionsSection from "./components/Conections/ConectionsSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen inset-x-0">
       <Hero />
       <AboutUs />
       <ConectionsSection />

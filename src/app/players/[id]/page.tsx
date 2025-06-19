@@ -56,10 +56,10 @@ export default function PlayerDetailPage() {
         </div>
       </header>
 
-      <div className="container px-4 md:px-6 py-8 mx-auto ">
-        <div className="grid gap-8 grid-cols-1 ">
-          {/* Columna izquierda - Información principal */}
+      <div className="container px-4 md:px-6 py-8 mx-auto flex flex-col gap-4">
+        {/* Columna izquierda - Información principal */}
 
+        <section className="w-full">
           <BasicInfo
             image={player.image}
             fullName={player.fullName}
@@ -74,55 +74,71 @@ export default function PlayerDetailPage() {
             height={player.height}
             weight={player.weight}
           />
+        </section>
 
+        <section className="w-full">
           <PlayerProfile
             profileSummary={player.profileSummary}
             currentLevel={player.currentLevel}
             objective={player.objective}
           />
+        </section>
 
-          <PlayerStats stats={player.stats} />
+        <div className="columns-1 lg:columns-2 gap-4">
+          <section className="break-inside-avoid mb-4">
+            {/* Video destacado */}
+            {player.videoUrl && (
+              <Card className="lg:grid-cols-1">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Play className="w-5 h-5" />
+                    <span>Video Destacado</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <video
+                    src={player.videoUrl}
+                    className="w-full max-h-screen object-cover rounded"
+                    controls
+                  />
+                </CardContent>
+              </Card>
+            )}
+          </section>
 
-          <TecnicEvaluation skills={player.skills} />
+          <section className="break-inside-avoid mb-4">
+            <Achievements achievements={player.achievements} />
+          </section>
 
-          {/* Video destacado */}
-          {player.videoUrl && (
+          <section className="break-inside-avoid mb-4">
+            <PlayerStats stats={player.stats} />
+          </section>
+
+          <section className="break-inside-avoid mb-4">
+            <TecnicEvaluation skills={player.skills} />
+          </section>
+
+          <section className="break-inside-avoid mb-4">
+            <ScoutingInfo
+              scoutingStatus={player.scoutingStatus}
+              clubsInterested={player.clubsInterested}
+            />
+          </section>
+
+          <section className="break-inside-avoid mb-4 ">
+            {/* Contacto */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Play className="w-5 h-5" />
-                  <span>Video Destacado</span>
-                </CardTitle>
+                <CardTitle>Contacto</CardTitle>
               </CardHeader>
-              <CardContent>
-                <video
-                  src={player.videoUrl}
-                  className="w-full max-h-screen object-cover rounded"
-                  controls
-                />
+              <CardContent className="space-y-4">
+                <Button className="w-full">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Solicitar más información
+                </Button>
               </CardContent>
             </Card>
-          )}
-
-          <ScoutingInfo
-            scoutingStatus={player.scoutingStatus}
-            clubsInterested={player.clubsInterested}
-          />
-
-          <Achievements achievements={player.achievements} />
-
-          {/* Contacto */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Contacto</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full">
-                <Mail className="w-4 h-4 mr-2" />
-                Solicitar más información
-              </Button>
-            </CardContent>
-          </Card>
+          </section>
         </div>
       </div>
     </main>

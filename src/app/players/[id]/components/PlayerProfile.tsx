@@ -12,7 +12,7 @@ const PlayerProfile = ({
   objective: string;
 }) => {
   return (
-    <Card className="lg:col-span-2">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
           <User className="w-5 h-5" />

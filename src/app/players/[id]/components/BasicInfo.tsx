@@ -34,7 +34,7 @@ const BasicInfo = ({
   weight: string;
 }) => {
   return (
-    <Card className="lg:col-span-2">
+    <Card>
       <CardContent className="p-6">
         {/* Información básica */}
         <div className="flex flex-col md:flex-row gap-6">

@@ -4,7 +4,7 @@ import React from "react";
 
 const PlayerStats = ({ stats }: { stats: any }) => {
   return (
-    <Card className="lg:col-span-1">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
           <TrendingUp className="w-5 h-5" />

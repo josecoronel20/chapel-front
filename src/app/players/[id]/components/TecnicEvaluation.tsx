@@ -5,7 +5,7 @@ const TecnicEvaluation = ({ skills }: { skills: any }) => {
   const skillsArray = Object.entries(skills);
 
   return (
-    <Card className="lg:col-span-1">
+    <Card>
       <CardHeader>
         <CardTitle>Evaluación Técnica</CardTitle>
       </CardHeader>
