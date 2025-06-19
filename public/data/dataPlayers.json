@@ -1,0 +1,256 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    },
+    {
+      "id": 2,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    },
+    {
+      "id": 3,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    },
+    {
+      "id": 4,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    },
+    {
+      "id": 5,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    },
+    {
+      "id": 6,
+      "fullName": "Mateo Alejandro González",
+      "birthDate": "15/03/2007",
+      "age": 17,
+      "nationality": "Argentina",
+      "city": "Rosario",
+      "province": "Santa Fe",
+      "height": "1.78m",
+      "weight": "72kg",
+      "dominantFoot": "Diestro",
+      "mainPosition": "Delantero Centro",
+      "secondaryPositions": ["Extremo Derecho", "Mediapunta"],
+      "profileSummary": "Delantero de área con gran instinto goleador y excelente juego aéreo. Destaca por su velocidad en espacios cortos y capacidad de definición con ambas piernas. Actualmente compite en la categoría 2007 y busca proyección en el fútbol argentino o europeo a nivel formativo.",
+      "currentLevel": "Categoría 2007 - Liga Regional Rosarina",
+      "objective": "Proyección en clubes de Primera División Argentina o academias europeas",
+      "image": "/jugadores/jugador1.jpg",
+      "videoUrl": "/trainingVideo.mp4",
+      "scoutingStatus": "Actualmente en seguimiento por River Plate y Estudiantes de La Plata. Observado en 3 torneos regionales durante 2024.",
+      "clubsInterested": ["River Plate", "Estudiantes", "FC Porto (Portugal)"],
+      "stats": {
+        "season": "2024",
+        "matches": 22,
+        "goals": 15,
+        "assists": 8,
+        "yellowCards": 2,
+        "redCards": 0
+      },
+      "skills": {
+        "technique": 85,
+        "speed": 90,
+        "strength": 78,
+        "vision": 82,
+        "finishing": 88,
+        "passing": 75
+      },
+      "achievements": [
+        "Goleador del Torneo Regional 2024 (15 goles)",
+        "Mejor Jugador Joven - Copa Santa Fe 2023",
+        "Seleccionado para Campus AFA 2024"
+      ]
+    }
+  ]
+}
