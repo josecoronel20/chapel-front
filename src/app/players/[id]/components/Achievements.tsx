@@ -10,12 +10,12 @@ const Achievements = ({achievements}: {achievements: string[]}) => {
     </CardHeader>
     <CardContent>
       <ul className="space-y-2">
-        {achievements.map((achievement, index) => (
+        {achievements.length > 0 ? achievements.map((achievement, index) => (
           <li key={index} className="flex items-start space-x-2">
             <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
             <span className="text-sm text-slate-700">{achievement}</span>
           </li>
-        ))}
+        )) : <span className="text-sm text-slate-700">No hay logros destacados por el momento</span>}
       </ul>
       </CardContent>
     </Card>

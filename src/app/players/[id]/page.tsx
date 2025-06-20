@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowLeft, Mail, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowLeft, Phone, Play } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import BasicInfo from "./components/BasicInfo";
@@ -10,7 +9,7 @@ import PlayerStats from "./components/PlayerStats";
 import TecnicEvaluation from "./components/TecnicEvaluation";
 import ScoutingInfo from "./components/ScoutingInfo";
 import { Player } from "@/lib/types";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Achievements from "./components/Achievements";
 
@@ -34,7 +33,7 @@ export default function PlayerDetailPage() {
   if (!player) return <div>Cargando...</div>;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-16 text-primary-darker">
+    <main className="min-h-screen bg-purple-100 pt-16 text-primary-darker">
       {/* Header con navegación */}
       <header className="bg-white shadow-sm border-b">
         <div className="container px-4 md:px-6 py-4">
@@ -66,7 +65,6 @@ export default function PlayerDetailPage() {
             mainPosition={player.mainPosition}
             secondaryPositions={player.secondaryPositions}
             birthDate={player.birthDate}
-            age={player.age}
             city={player.city}
             province={player.province}
             nationality={player.nationality}
@@ -87,7 +85,7 @@ export default function PlayerDetailPage() {
         <div className="columns-1 lg:columns-2 gap-4">
           <section className="break-inside-avoid mb-4">
             {/* Video destacado */}
-            {player.videoUrl && (
+            
               <Card className="lg:grid-cols-1">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -96,26 +94,34 @@ export default function PlayerDetailPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
+                  {player.videoUrl ? (
                   <video
                     src={player.videoUrl}
                     className="w-full max-h-screen object-cover rounded"
                     controls
                   />
+                  ) : (
+                    <div className="flex justify-center items-center h-full">
+                      <p className="text-sm text-slate-600">No hay video destacado por el momento</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
-            )}
+            
+          </section>
+
+          
+            <section className="break-inside-avoid mb-4">
+              <Achievements achievements={player.achievements} />
+            </section>
+          
+
+          <section className="break-inside-avoid mb-4">
+            <PlayerStats playerInfo={player} />
           </section>
 
           <section className="break-inside-avoid mb-4">
-            <Achievements achievements={player.achievements} />
-          </section>
-
-          <section className="break-inside-avoid mb-4">
-            <PlayerStats stats={player.stats} />
-          </section>
-
-          <section className="break-inside-avoid mb-4">
-            <TecnicEvaluation skills={player.skills} />
+            <TecnicEvaluation playerInfo={player} />
           </section>
 
           <section className="break-inside-avoid mb-4">
@@ -132,10 +138,10 @@ export default function PlayerDetailPage() {
                 <CardTitle>Contacto</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button className="w-full">
-                  <Mail className="w-4 h-4 mr-2" />
+                <Link href={`https://wa.me/541124748065`} className="w-full cursor-pointer bg-primary-light text-white p-2 rounded-md hover:bg-primary-lighter flex justify-center items-center gap-2 hover:scale-105 transition-all duration-300" target="_blank">
+                  <Phone className="w-4 h-4 " />
                   Solicitar más información
-                </Button>
+                </Link>
               </CardContent>
             </Card>
           </section>

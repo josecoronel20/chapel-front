@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Calendar, Trophy, Ruler } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
+import { Trophy } from "lucide-react";
 import Link from "next/link";
 import { Player } from "@/lib/types";
+import CardPlayer from "./components/CardPlayer";
 
 export default function PlayersPage() {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -48,69 +46,7 @@ export default function PlayersPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
           {players.map((player) => (
             <Link href={`/players/${player.id}`} key={player.id}>
-              <Card
-                key={player.id}
-                className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20"
-              >
-                <div className="relative">
-                  <Image
-                    src={player.image || "/placeholder.svg"}
-                    alt={player.fullName}
-                    width={250}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                  />
-                </div>
-
-                <CardContent className="p-4">
-                  <div className="space-y-3">
-                    <div>
-                      <h3 className="font-bold text-lg text-primary-dark">
-                        {player.fullName}
-                      </h3>
-                      <p className="text-primary-dark text-sm">
-                        {player.mainPosition}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between text-sm text-primary-dark">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{player.age} años</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Ruler className="w-4 h-4" />
-                        <span>
-                          {player.height} cm / {player.weight} kg
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Clubes interesados */}
-                    {player.clubsInterested &&
-                      player.clubsInterested.length > 0 && (
-                        <div className="pt-3 border-t">
-                          <p className="text-xs text-slate-600 mb-2">
-                            Interés de clubes:
-                          </p>
-                          <div className="flex flex-wrap gap-1">
-                            {player.clubsInterested.map(
-                              (club: string, index: number) => (
-                                <Badge
-                                  key={index}
-                                  variant="outline"
-                                  className="text-xs"
-                                >
-                                  {club}
-                                </Badge>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-                  </div>
-                </CardContent>
-              </Card>
+              <CardPlayer player={player} />
             </Link>
           ))}
         </div>

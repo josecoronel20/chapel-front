@@ -12,7 +12,6 @@ const BasicInfo = ({
   mainPosition,
   secondaryPositions,
   birthDate,
-  age,
   city,
   province,
   nationality,
@@ -25,7 +24,6 @@ const BasicInfo = ({
   mainPosition: string;
   secondaryPositions: string[];
   birthDate: string;
-  age: number;
   city: string;
   province: string;
   nationality: string;
@@ -33,12 +31,17 @@ const BasicInfo = ({
   height: string;
   weight: string;
 }) => {
+  const [day, month, year] = birthDate.split("/");
+  const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
+  const age = new Date().getFullYear() - parsedDate.getFullYear();
+
   return (
     <Card>
       <CardContent className="p-6">
         {/* Información básica */}
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-shrink-0">
+            {image ? (
             <Image
               src={image || "/placeholder.svg"}
               alt={fullName}
@@ -46,14 +49,19 @@ const BasicInfo = ({
               height={400}
               className="w-48 h-64 object-cover rounded-lg shadow-lg"
             />
+            ) : (
+              <User 
+              className="w-48 h-64 object-cover text-primary-dark"
+              />
+            )}
           </div>
           <div className="flex-1 space-y-4">
             <div>
-              <h1 className="text-3xl font-bold text-primary-darker mb-2">
+              <h1 className="text-3xl font-bold text-primary mb-2">
                 {fullName}
               </h1>
               <div className="flex flex-wrap gap-2 mb-4">
-                <Badge className="bg-blue-100 text-blue-800">
+                <Badge className="bg-secondary-lighter text-secondary">
                   {mainPosition}
                 </Badge>
                 {secondaryPositions.map((pos, index) => (
@@ -92,12 +100,12 @@ const BasicInfo = ({
               </div>
               <div>
                 <span>
-                  <strong>Altura:</strong> {height}
+                  <strong>Altura:</strong> {height} m
                 </span>
               </div>
               <div>
                 <span>
-                  <strong>Peso:</strong> {weight}
+                  <strong>Peso:</strong> {weight} kg
                 </span>
               </div>
             </div>

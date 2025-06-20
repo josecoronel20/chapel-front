@@ -2,7 +2,6 @@ export interface Player {
     id: number;
     fullName: string;
     birthDate: string;
-    age: number;
     nationality: string;
     city: string;
     province: string;
@@ -25,6 +24,8 @@ export interface Player {
       assists: number;
       yellowCards: number;
       redCards: number;
+      goalsReceived: number;
+      cleanSheets: number;
     };
     skills: {
       technique: number;
@@ -33,6 +34,12 @@ export interface Player {
       vision: number;
       finishing: number;
       passing: number;
+      reflexes: number;
+      crossHandling: number;
+      oneOnOnes: number;
+      footWork: number;
+      leadership: number;
+      kickingPower: number;
     };
     achievements: string[];
   }
