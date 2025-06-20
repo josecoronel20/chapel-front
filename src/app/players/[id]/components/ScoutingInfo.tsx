@@ -26,11 +26,11 @@ const ScoutingInfo = ({
               Clubes Interesados
             </h4>
             <div className="space-y-2">
-              {clubsInterested.map((club, index) => (
+              {clubsInterested.length > 0 ? clubsInterested.map((club, index) => (
                 <Badge key={index} variant="outline" className="mr-2 mb-2">
                   {club}
                 </Badge>
-              ))}
+              )) : <p className="text-sm text-slate-700">No hay clubes interesados por el momento</p>}
             </div>
           </div>
         </CardContent>

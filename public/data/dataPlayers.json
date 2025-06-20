@@ -40,12 +40,12 @@
         "vision": 82,
         "finishing": 70,
         "passing": 75,
-        "reflexes": 80,
-        "crossHandling": 80,
-        "oneOnOnes": 80,
-        "footWork": 80,
-        "leadership": 80,
-        "kickingPower": 80
+        "reflexes": 0,
+        "crossHandling": 0,
+        "oneOnOnes": 0,
+        "footWork": 0,
+        "leadership": 0,
+        "kickingPower": 0
       },
       "achievements": [
         "Seleccionado para Campus AFA",
@@ -310,7 +310,7 @@
       "objective": "Jugar en Primera División",
       "image": "",
       "videoUrl": "",
-      "scoutingStatus": "",
+      "scoutingStatus": "Sin seguimiento confirmado actualmente.",
       "clubsInterested": [],
       "stats": {
         "season": "2024",
@@ -356,7 +356,7 @@
       "objective": "Jugar en Primera División del fútbol argentino o jugar en Europa",
       "image": "",
       "videoUrl": "",
-      "scoutingStatus": "",
+      "scoutingStatus": "Sin seguimiento confirmado actualmente.",
       "clubsInterested": [],
       "stats": {
         "season": "2025",
