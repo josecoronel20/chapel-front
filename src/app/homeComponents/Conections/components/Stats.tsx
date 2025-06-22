@@ -1,4 +1,4 @@
-import { Trophy, Flag, Eye } from 'lucide-react';
+import { Trophy, Flag, Eye } from "lucide-react";
 
 export default function Stats() {
   const statistics = [
@@ -28,15 +28,17 @@ export default function Stats() {
         {statistics.map((stat, index) => (
           <div
             key={index}
-            className={`bg-white rounded-xl w-full p-6 shadow-lg border grid-cols-1 md:grid-cols-2 border-slate-100 ${index === 2 ? "md:col-span-2" : "md:col-span-1"}`}
+            className={`bg-white rounded-xl w-full p-6 shadow-lg border grid-cols-1 md:grid-cols-2 border-slate-100 ${
+              index === 2 ? "md:col-span-2" : "md:col-span-1"
+            }`}
           >
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-4">
               <div
-                className={`w-12 h-12 bg-gradient-to-br from-primary-dark to-primary-lighter rounded-full flex items-center justify-center`}
+                className={`h-12 bg-gradient-to-br ${index === 1 ? 'from-secondary-dark to-secondary-lighter' : 'from-primary-dark to-primary-lighter'} rounded-full flex items-center justify-center px-3`}
               >
                 <stat.icon className="w-6 h-6 text-white" />
               </div>
-              <div >
+              <div className="w-full">
                 <div className="text-2xl font-bold text-slate-800">
                   {stat.value}
                 </div>

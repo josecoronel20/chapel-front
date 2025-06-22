@@ -9,29 +9,32 @@ import PlayerStats from "./components/PlayerStats";
 import TecnicEvaluation from "./components/TecnicEvaluation";
 import ScoutingInfo from "./components/ScoutingInfo";
 import { Player } from "@/lib/types";
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Achievements from "./components/Achievements";
 import ButonsAdmin from "./components/ButonsAdmin";
+import useSWR from "swr";
+import { fetcher } from "@/lib/utils";
+import PlayerDetailSkeleton from "./components/PlayerDetailSkeleton";
+import Video from "./components/Video";
+import MoreInfo from "./components/MoreInfo";
 
 export default function PlayerDetailPage() {
   const params = useParams();
   const id = params.id as string;
-  const [player, setPlayer] = useState<Player | null>(null);
 
-  useEffect(() => {
-    const fetchPlayer = async () => {
-      const res = await fetch("/data/dataPlayers.json");
-      const data = await res.json();
-      setPlayer(
-        data.players.find((player: Player) => player.id === parseInt(id))
-      );
-    };
+  const { data, isLoading, error } = useSWR("/data/dataPlayers.json", fetcher);
 
-    fetchPlayer();
-  }, [id]);
+  {
+    isLoading && <PlayerDetailSkeleton />;
+  }
 
-  if (!player) return <div>Cargando...</div>;
+  const player = data.players.find(
+    (player: Player) => player.id === parseInt(id)
+  );
+
+  {
+    error || !data || !player && <div>error al cargar jugador</div>;
+  }
 
   return (
     <main className="min-h-screen bg-purple-100 pt-16 text-primary-darker">
@@ -86,37 +89,12 @@ export default function PlayerDetailPage() {
 
         <div className="columns-1 lg:columns-2 gap-4">
           <section className="break-inside-avoid mb-4">
-            {/* Video destacado */}
-            
-              <Card className="lg:grid-cols-1">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Play className="w-5 h-5" />
-                    <span>Video Destacado</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {player.videoUrl ? (
-                  <video
-                    src={player.videoUrl}
-                    className="w-full max-h-screen object-cover rounded"
-                    controls
-                  />
-                  ) : (
-                    <div className="flex justify-center items-center h-full">
-                      <p className="text-sm text-slate-600">No hay video destacado por el momento</p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            
+            <Video videoUrl={player.videoUrl} />
           </section>
 
-          
-            <section className="break-inside-avoid mb-4">
-              <Achievements achievements={player.achievements} />
-            </section>
-          
+          <section className="break-inside-avoid mb-4">
+            <Achievements achievements={player.achievements} />
+          </section>
 
           <section className="break-inside-avoid mb-4">
             <PlayerStats playerInfo={player} />
@@ -134,18 +112,7 @@ export default function PlayerDetailPage() {
           </section>
 
           <section className="break-inside-avoid mb-4 ">
-            {/* Contacto */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Contacto</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Link href={`https://wa.me/541124748065`} className="w-full cursor-pointer bg-primary-light text-white p-2 rounded-md hover:bg-primary-lighter flex justify-center items-center gap-2 hover:scale-105 transition-all duration-300" target="_blank">
-                  <Phone className="w-4 h-4 " />
-                  Solicitar más información
-                </Link>
-              </CardContent>
-            </Card>
+            <MoreInfo />
           </section>
         </div>
       </div>

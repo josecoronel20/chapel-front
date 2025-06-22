@@ -13,12 +13,12 @@ const interestedClubs = [
       ];
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-8 lg:py-10">
             <h3 className="text-2xl font-bold text-slate-800 text-center">
               Clubes que han mostrado interés
             </h3>
-            <div className="bg-white rounded-2xl shadow-lg p-8 border">
-              <div className="grid grid-cols-2 md:grid-cols-4  gap-4 items-center">
+            <div className="bg-white rounded-2xl shadow-lg border">
+              <div className="grid grid-cols-4 items-center">
                 {interestedClubs.map((club, index) => (
                   <div
                     key={index}

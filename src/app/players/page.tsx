@@ -5,19 +5,21 @@ import { Plus, Trophy } from "lucide-react";
 import Link from "next/link";
 import { Player } from "@/lib/types";
 import CardPlayer from "./playersComponents/CardPlayer";
+import useSWR from "swr";
+import PlayersPageSkeleton from "./playersComponents/PlayersPageSkeleton";
+import { fetcher } from "@/lib/utils";
 
 export default function PlayersPage() {
-  const [players, setPlayers] = useState<Player[]>([]);
+  const { data, isLoading, error } = useSWR("/data/dataPlayers.json", fetcher);
+  const players = data?.players;
 
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      const res = await fetch("/data/dataPlayers.json");
-      const data = await res.json();
-      setPlayers(data.players);
-    };
+  {
+    isLoading && <PlayersPageSkeleton />;
+  }
 
-    fetchPlayers();
-  }, []);
+  if (error || !data) {
+    return <div>Error al cargar los jugadores</div>;
+  }
 
   return (
     <main className="min-h-screen bg-purple-100 pt-16">
@@ -53,7 +55,7 @@ export default function PlayersPage() {
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
-          {players.map((player) => (
+          {players.map((player: Player) => (
             <Link href={`/players/${player.id}`} key={player.id}>
               <CardPlayer player={player} />
             </Link>

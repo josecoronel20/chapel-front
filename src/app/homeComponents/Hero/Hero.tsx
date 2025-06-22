@@ -10,7 +10,8 @@ export default function Hero() {
         alt="Hero"
         width={1920}
         height={1080}
-        className="absolute w-full h-full object-cover z-10 brightness-[0.4] "
+        className="absolute w-full h-full object-cover z-10 brightness-[0.4]"
+        priority
       />
 
       {/* Contenido */}
@@ -36,7 +37,7 @@ export default function Hero() {
           >
             Conocé a nuestros jugadores
           </Link>
-        </div>{" "}
+        </div>
       </div>
     </section>
   );

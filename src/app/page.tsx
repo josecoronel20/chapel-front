@@ -1,10 +1,10 @@
-import Hero from "./components/Hero/Hero";
-import AboutUs from "./components/AboutUs/AboutUs";
-import ConectionsSection from "./components/Conections/ConectionsSection";
+import Hero from "./homeComponents/Hero/Hero";
+import AboutUs from "./homeComponents/AboutUs/AboutUs";
+import ConectionsSection from "./homeComponents/Conections/ConectionsSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen inset-x-0">
+    <main className="min-h-screen overflow-hidden">
       <Hero />
       <AboutUs />
       <ConectionsSection />
