@@ -31,7 +31,7 @@ const BasicInfo = ({
   height: string;
   weight: string;
 }) => {
-  const [day, month, year] = birthDate.split("/");
+  const [year, month, day] = birthDate.split("-");
   const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
   const age = new Date().getFullYear() - parsedDate.getFullYear();
 

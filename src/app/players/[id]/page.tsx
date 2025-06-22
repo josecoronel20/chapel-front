@@ -12,6 +12,7 @@ import { Player } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Achievements from "./components/Achievements";
+import ButonsAdmin from "./components/ButonsAdmin";
 
 export default function PlayerDetailPage() {
   const params = useParams();
@@ -53,6 +54,7 @@ export default function PlayerDetailPage() {
             </div>
           </div>
         </div>
+        {/* <ButonsAdmin id={id} /> */}
       </header>
 
       <div className="container px-4 md:px-6 py-8 mx-auto flex flex-col gap-4">
