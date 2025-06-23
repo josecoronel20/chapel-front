@@ -24,16 +24,20 @@ export default function PlayerDetailPage() {
 
   const { data, isLoading, error } = useSWR("/data/dataPlayers.json", fetcher);
 
-  {
-    isLoading && <PlayerDetailSkeleton />;
+  if (isLoading) {
+    return <PlayerDetailSkeleton />;
+  }
+
+  if (error || !data) {
+    return <div>Error al cargar jugador</div>;
   }
 
   const player = data.players.find(
     (player: Player) => player.id === parseInt(id)
   );
 
-  {
-    error || !data || !player && <div>error al cargar jugador</div>;
+  if (!player) {
+    return <div>Jugador no encontrado</div>;
   }
 
   return (

@@ -1,11 +1,9 @@
-
 import ScoutingFlow from "./components/ScoutingFlow";
 import Stats from "./components/Stats";
 import ClubsLogos from "./components/ClubsLogos";
 import Link from "next/link";
 
 export default function ConectionsSection() {
-
   return (
     <section className="w-full py-16 md:py-24 lg:py-32 bg-purple-100">
       <div className="container px-4 mx-auto md:px-6">
@@ -27,12 +25,16 @@ export default function ConectionsSection() {
           <Stats />
 
           <ClubsLogos />
-        </div>  
-
+        </div>
 
         {/* Call to action */}
-        <div className="text-center mt-12"> 
-            <Link href="/players" className="bg-secondary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary-light transition-colors">Conoce a nuestros jugadores</Link>
+        <div className="text-center mt-12">
+          <Link
+            href="/players"
+            className="bg-secondary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary-light transition-colors"
+          >
+            Conoce a nuestros jugadores
+          </Link>
         </div>
       </div>
     </section>
