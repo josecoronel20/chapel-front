@@ -8,15 +8,17 @@ export interface Player {
     height: string;
     weight: string;
     dominantFoot: "Diestro" | "Zurdo" | "Ambidiestro";
+    transferStatus: "Libre" | "A préstamo" | "Transferido" | "En negociación";
     mainPosition: string;
     secondaryPositions: string[];
     profileSummary: string;
-    currentLevel: string;
+    currentLevel?: string;
     objective: string;
-    image: string;
+    image?: string;
     videoUrl?: string;
-    scoutingStatus: string;
-    clubsInterested: string[];
+    scoutingStatus?: string;
+    clubsInterested?: string[];
+    clubsHistory?: string[];
     stats: {
       season: string;
       matches: number;
@@ -41,5 +43,5 @@ export interface Player {
       leadership: number;
       kickingPower: number;
     };
-    achievements: string[];
+    achievements?: string[];
   }

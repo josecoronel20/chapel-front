@@ -13,8 +13,15 @@ import Image from "next/image";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import login from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
+import useRedirect from "@/hooks/useRedirect";
 
 export default function LoginChapel() {
+  useRedirect("login");
+  const router = useRouter();
+
+
   const User = z.object({
     username: z
       .string()
@@ -34,33 +41,40 @@ export default function LoginChapel() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof User>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof User>) => {
+    const response = await login(data.username, data.password);
+    if (response.status === 200) {
+      router.push("/players");
+    } else {
+      console.log("response status: ", response.status);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-bg">
       <Card className="w-full max-w-md bg-bg-alt border-none">
-        <CardHeader className="space-y-6 text-center">
-          {/* Logo placeholder */}
-          <div className="flex w-full justify-center">
-            <Image
-              src="/chapelLogo-removebg-preview.png"
-              alt="Chapel Logo"
-              width={100}
-              height={100}
-            />
-          </div>
+        <header>
+          <CardHeader className="space-y-6 text-center">
+            {/* Logo placeholder */}
+            <div className="flex w-full justify-center">
+              <Image
+                src="/chapelLogo.png"
+                alt="Chapel Logo"
+                width={100}
+                height={100}
+              />
+            </div>
 
-          <div className="space-y-2">
-            <CardTitle className="text-2xl font-bold text-text">
-              Iniciar Sesión
-            </CardTitle>
-            <CardDescription className="text-text-muted">
-              Ingresa tus credenciales para acceder
-            </CardDescription>
-          </div>
-        </CardHeader>
+            <div className="space-y-2">
+              <CardTitle className="text-2xl font-bold text-text">
+                Iniciar Sesión
+              </CardTitle>
+              <CardDescription className="text-text-muted">
+                Ingresa tus credenciales para acceder
+              </CardDescription>
+            </div>
+          </CardHeader>
+        </header>
 
         <CardContent className="space-y-6">
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>

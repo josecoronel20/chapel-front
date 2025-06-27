@@ -33,7 +33,7 @@ const Logo = () => {
   return (
     <div className="flex items-center gap-1 relative z-40">
       <Image
-        src="/chapelLogo-removebg-preview.png"
+        src="/chapelLogo.png"
         alt="Chapel Futbol"
         width={48}
         height={48}

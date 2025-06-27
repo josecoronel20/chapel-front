@@ -24,78 +24,78 @@ const PersonalInfo = ({ form }: { form: UseFormReturn<any> }) => {
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="nombreCompleto" className="text-text-light">
+            <Label htmlFor="fullName" className="text-text-light">
               Nombre Completo
             </Label>
             <Input
-              id="nombreCompleto"
-              {...form.register("nombreCompleto")}
+              id="fullName"
+              {...form.register("fullName")}
               className="bg-bg border-primary/30 text-text"
               required
             />
           </div>
           <div>
-            <Label htmlFor="fechaNacimiento" className="text-text-light">
+            <Label htmlFor="birthDate" className="text-text-light">
               Fecha de Nacimiento
             </Label>
             <Controller
               control={form.control}
-              name="fechaNacimiento"
+              name="birthDate"
               render={({ field }) => (
                 <Input
-                  id="fechaNacimiento"
+                  id="birthDate"
                   type="date"
                   value={field.value ?? ""}
                   onChange={(e) => {
-                    
                     field.onChange(e.target.value);
                   }}
                   className="bg-bg border-primary/30 text-text"
                   required
                 />
               )}
-            />  
+            />
           </div>
           <div>
-            <Label htmlFor="nacionalidad" className="text-text-light">
+            <Label htmlFor="nationality" className="text-text-light">
               Nacionalidad
             </Label>
             <Input
-              id="nacionalidad"
-              {...form.register("nacionalidad")}
+              id="nationality"
+              {...form.register("nationality")}
               className="bg-bg border-primary/30 text-text"
               required
             />
           </div>
           <div>
-            <Label htmlFor="ciudad" className="text-text-light">
+            <Label htmlFor="city" className="text-text-light">
               Ciudad
             </Label>
             <Input
-              id="ciudad"
-              {...form.register("ciudad")}
+              id="city"
+              {...form.register("city")}
               className="bg-bg border-primary/30 text-text"
               required
             />
           </div>
           <div>
-            <Label htmlFor="provincia" className="text-text-light">
+            <Label htmlFor="province" className="text-text-light">
               Provincia
             </Label>
             <Input
-              id="provincia"
-              {...form.register("provincia")}
+              id="province"
+              {...form.register("province")}
               className="bg-bg border-primary/30 text-text"
               required
             />
           </div>
           <div>
-            <Label htmlFor="piernaHabil" className="text-text-light">
+            <Label htmlFor="dominantFoot" className="text-text-light">
               Pierna Hábil
             </Label>
             <Controller
+              key={form.watch("dominantFoot")}
               control={form.control}
-              name="piernaHabil"
+              name="dominantFoot"
               render={({ field }) => (
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger className="bg-bg border-primary/30 text-text">
@@ -110,27 +110,52 @@ const PersonalInfo = ({ form }: { form: UseFormReturn<any> }) => {
               )}
             />
           </div>
+          <div>
+            <Label htmlFor="transferStatus" className="text-text-light">
+              Estado de pase
+            </Label>
+            <Controller
+              key={form.watch("transferStatus")}
+              control={form.control}
+              name="transferStatus"
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="bg-bg border-primary/30 text-text">
+                    <SelectValue placeholder="Seleccione el estado" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-bg-alt border-primary/30">
+                    <SelectItem value="Libre">Libre</SelectItem>
+                    <SelectItem value="A préstamo">A préstamo</SelectItem>
+                    <SelectItem value="Transferido">Transferido</SelectItem>
+                    <SelectItem value="En negociación">
+                      En negociación
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="altura" className="text-text-light">
+            <Label htmlFor="height" className="text-text-light">
               Altura (cm)
             </Label>
             <Input
-              id="altura"
-              {...form.register("altura")}
+              id="height"
+              {...form.register("height")}
               className="bg-bg border-primary/30 text-text"
               placeholder="175"
             />
           </div>
           <div>
-            <Label htmlFor="peso" className="text-text-light">
+            <Label htmlFor="weight" className="text-text-light">
               Peso (kg)
             </Label>
             <Input
-              id="peso"
-              {...form.register("peso")}
+              id="weight"
+              {...form.register("weight")}
               className="bg-bg border-primary/30 text-text"
               placeholder="70"
             />
@@ -139,23 +164,23 @@ const PersonalInfo = ({ form }: { form: UseFormReturn<any> }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="imagen" className="text-text-light">
+            <Label htmlFor="image" className="text-text-light">
               URL de Imagen
             </Label>
             <Input
-              id="imagen"
-              {...form.register("imagen")}
+              id="image"
+              {...form.register("image")}
               className="bg-bg border-primary/30 text-text"
               placeholder="https://..."
             />
           </div>
           <div>
-            <Label htmlFor="urlVideo" className="text-text-light">
+            <Label htmlFor="videoUrl" className="text-text-light">
               URL de Video (Opcional)
             </Label>
             <Input
-              id="urlVideo"
-              {...form.register("urlVideo")}
+              id="videoUrl"
+              {...form.register("videoUrl")}
               className="bg-bg border-primary/30 text-text"
               placeholder="https://..."
             />

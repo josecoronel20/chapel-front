@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowLeft, Phone, Play } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import BasicInfo from "./components/BasicInfo";
 import PlayerProfile from "./components/PlayerProfile";
@@ -17,12 +16,18 @@ import { fetcher } from "@/lib/utils";
 import PlayerDetailSkeleton from "./components/PlayerDetailSkeleton";
 import Video from "./components/Video";
 import MoreInfo from "./components/MoreInfo";
+import ClubsHistory from "./components/ClubsHistory";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 
 export default function PlayerDetailPage() {
+  //todo:agregar libre de pase y clubes donde jugaron
   const params = useParams();
-  const id = params.id as string;
+  const id = parseInt(params.id as string);
+  const status = useIsLoggedIn();
 
-  const { data, isLoading, error } = useSWR("/data/dataPlayers.json", fetcher);
+  const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/players/${id}`, fetcher);
+  const player = data;
+  console.log(player);
 
   if (isLoading) {
     return <PlayerDetailSkeleton />;
@@ -31,10 +36,6 @@ export default function PlayerDetailPage() {
   if (error || !data) {
     return <div>Error al cargar jugador</div>;
   }
-
-  const player = data.players.find(
-    (player: Player) => player.id === parseInt(id)
-  );
 
   if (!player) {
     return <div>Jugador no encontrado</div>;
@@ -61,7 +62,7 @@ export default function PlayerDetailPage() {
             </div>
           </div>
         </div>
-        {/* <ButonsAdmin id={id} /> */}
+        {status === "authenticated" && <ButonsAdmin id={id} />}
       </header>
 
       <div className="container px-4 md:px-6 py-8 mx-auto flex flex-col gap-4">
@@ -80,6 +81,7 @@ export default function PlayerDetailPage() {
             dominantFoot={player.dominantFoot}
             height={player.height}
             weight={player.weight}
+            transferStatus={player.transferStatus}
           />
         </section>
 
@@ -92,6 +94,17 @@ export default function PlayerDetailPage() {
         </section>
 
         <div className="columns-1 lg:columns-2 gap-4">
+          <section className="break-inside-avoid mb-4">
+            <ScoutingInfo
+              scoutingStatus={player.scoutingStatus}
+              clubsInterested={player.clubsInterested}
+            />
+          </section>
+
+          <section className="break-inside-avoid mb-4">
+            <ClubsHistory clubsHistory={player.clubsHistory} />
+          </section>
+
           <section className="break-inside-avoid mb-4">
             <Video videoUrl={player.videoUrl} />
           </section>
@@ -106,13 +119,6 @@ export default function PlayerDetailPage() {
 
           <section className="break-inside-avoid mb-4">
             <TecnicEvaluation playerInfo={player} />
-          </section>
-
-          <section className="break-inside-avoid mb-4">
-            <ScoutingInfo
-              scoutingStatus={player.scoutingStatus}
-              clubsInterested={player.clubsInterested}
-            />
           </section>
 
           <section className="break-inside-avoid mb-4 ">

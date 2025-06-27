@@ -3,16 +3,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Calendar, Ruler, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { formatBirthDate } from "@/lib/utils";
 
 const CardPlayer = ({ player }: { player: Player }) => {
-  const [year, month, day] = player.birthDate.split("-");
-  const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
-  const age = new Date().getFullYear() - parsedDate.getFullYear();
+  const { age } = formatBirthDate(player.birthDate);
 
   return (
     <Card
       key={player.id}
-      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full"
+      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full relative"
     >
       <div className="relative">
         {player.image ? (
@@ -26,6 +25,17 @@ const CardPlayer = ({ player }: { player: Player }) => {
         ) : (
           <User className="w-full h-48 object-cover text-primary-dark" />
         )}
+      </div>
+
+      <div
+        className={`absolute top-2 right-2 ${
+          player.transferStatus === "Libre" ? "bg-green-500" : "bg-primary"
+        } text-white px-2 py-1 rounded-md text-xs`}
+      >
+        <p>
+          Estado de pase:{" "}
+          <span className="font-bold">{player.transferStatus}</span>
+        </p>
       </div>
 
       <CardContent className="p-4">

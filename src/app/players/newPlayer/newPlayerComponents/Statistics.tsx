@@ -21,50 +21,50 @@ const Statistics = ({
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <Label htmlFor="temporada" className="text-text-light">
+          <Label htmlFor="season" className="text-text-light">
             Temporada
           </Label>
           <Input
-            id="temporada"
+            id="season"
             type="text"
-            {...form.register("estadisticas.temporada")}
+            {...form.register("stats.season")}
             className="bg-bg border-primary/30 text-text"
             placeholder="2023-2024"
           />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <Label htmlFor="partidos" className="text-text-light">
+            <Label htmlFor="matches" className="text-text-light">
               Partidos
             </Label>
             <Input
-              id="partidos"
+              id="matches"
               type="number"
-              {...form.register("estadisticas.partidos", { valueAsNumber: true })}
+              {...form.register("stats.matches", { valueAsNumber: true })}
               className="bg-bg border-primary/30 text-text"
             />  
           </div>
           {isGoalkeeper ? (
             <>
               <div>
-                <Label htmlFor="golesRecibidos" className="text-text-light">
+                <Label htmlFor="goalsReceived" className="text-text-light">
                   Goles Recibidos
                 </Label>
                 <Input
-                  id="golesRecibidos"
+                  id="goalsReceived"
                   type="number"
-                  {...form.register("estadisticas.golesRecibidos", { valueAsNumber: true })}
+                  {...form.register("stats.goalsReceived", { valueAsNumber: true })}
                   className="bg-bg border-primary/30 text-text"
                 />
               </div>
               <div>
-                <Label htmlFor="vallasInvictas" className="text-text-light">
+                <Label htmlFor="cleanSheets" className="text-text-light">
                   Vallas Invictas
                 </Label>
                 <Input
-                  id="vallasInvictas"
+                  id="cleanSheets"
                   type="number"
-                  {...form.register("estadisticas.vallasInvictas", { valueAsNumber: true })}
+                  {...form.register("stats.cleanSheets", { valueAsNumber: true })}
                   className="bg-bg border-primary/30 text-text"
                 />
               </div>
@@ -72,48 +72,48 @@ const Statistics = ({
           ) : (
             <>
               <div>
-                <Label htmlFor="goles" className="text-text-light">
+                <Label htmlFor="goals" className="text-text-light">
                   Goles
                 </Label>
                 <Input
-                  id="goles"
+                  id="goals"
                   type="number"
-                  {...form.register("estadisticas.goles", { valueAsNumber: true })}
+                  {...form.register("stats.goals", { valueAsNumber: true })}
                   className="bg-bg border-primary/30 text-text"
                 />
               </div>
               <div>
-                <Label htmlFor="asistencias" className="text-text-light">
+                <Label htmlFor="assists" className="text-text-light">
                   Asistencias
                 </Label>
                 <Input
-                  id="asistencias"
+                  id="assists"
                   type="number"
-                  {...form.register("estadisticas.asistencias", { valueAsNumber: true })}
+                  {...form.register("stats.assists", { valueAsNumber: true })}
                   className="bg-bg border-primary/30 text-text"
                 />
               </div>
             </>
           )}
           <div>
-            <Label htmlFor="tarjetasAmarillas" className="text-text-light">
+            <Label htmlFor="yellowCards" className="text-text-light">
               T. Amarillas
             </Label>
             <Input
-              id="tarjetasAmarillas"
+              id="yellowCards"
               type="number"
-              {...form.register("estadisticas.tarjetasAmarillas", { valueAsNumber: true })}
+              {...form.register("stats.yellowCards", { valueAsNumber: true })}
               className="bg-bg border-primary/30 text-text"
             />
           </div>
           <div>
-            <Label htmlFor="tarjetasRojas" className="text-text-light">
+            <Label htmlFor="redCards" className="text-text-light">
               T. Rojas
             </Label>
             <Input
-              id="tarjetasRojas"
+              id="redCards"
               type="number"
-              {...form.register("estadisticas.tarjetasRojas", { valueAsNumber: true })}
+              {...form.register("stats.redCards", { valueAsNumber: true })}
               className="bg-bg border-primary/30 text-text"
             />
           </div>

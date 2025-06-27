@@ -1,11 +1,9 @@
+import ControllerArrayInput from "@/app/players/playersComponents/ControllerArrayInput";
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Trophy } from "lucide-react";
-import { Controller, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 
 const Achievements = ({ form }: { form: UseFormReturn<any> }) => {
-
-
   return (
     <Card className="bg-bg-alt border-primary/20">
       <CardHeader>
@@ -18,28 +16,11 @@ const Achievements = ({ form }: { form: UseFormReturn<any> }) => {
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
-      <Controller
-          control={form.control}
-          name="logros"
-          render={({ field }) => (
-            <Input
-              id="logros"
-              value={
-                Array.isArray(field.value)
-                  ? field.value.join(", ")
-                  : field.value || ""
-              }
-              onChange={(e) => {
-                const value = e.target.value;
-                const logros = value.includes(",")
-                  ? value.split(",").map((v) => v.trim())
-                  : [value.trim()];
-                field.onChange(logros);
-              }}
-              className="bg-bg border-primary/30 text-text"
-              placeholder="Logro"
-            />
-          )}
+        <ControllerArrayInput
+          form={form}
+          propToModify="achievements"
+          placeholder="Logro"
+          isEditPage={true}
         />
       </CardContent>
     </Card>

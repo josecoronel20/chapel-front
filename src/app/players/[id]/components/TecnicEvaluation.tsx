@@ -12,7 +12,7 @@ const TecnicEvaluation = ({ playerInfo }: { playerInfo: Player }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         {skillsArray.map(([skill, value]) => {
-          if (value > 0) {
+          if (value > 0 && skill !== "id") {
             return (
               <div key={skill} className="space-y-2">
                 <div className="flex justify-between">

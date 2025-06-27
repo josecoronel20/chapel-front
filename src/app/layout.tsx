@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/chapelLogo-removebg-preview.png" type="image/x-icon" />
+        <link rel="icon" href="/chapelLogo.png" type="image/x-icon" />
       </head>
       <body className={montserrat.className + " bg-bg text-text min-h-screen"}>
         <Header />

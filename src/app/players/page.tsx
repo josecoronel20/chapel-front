@@ -8,10 +8,15 @@ import CardPlayer from "./playersComponents/CardPlayer";
 import useSWR from "swr";
 import PlayersPageSkeleton from "./playersComponents/PlayersPageSkeleton";
 import { fetcher } from "@/lib/utils";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 
 export default function PlayersPage() {
-  const { data, isLoading, error } = useSWR("/data/dataPlayers.json", fetcher);
-  const players = data?.players;
+  //todo:agregar filtro
+  const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/players`, fetcher);
+  const players = data;
+  console.log(players);
+
+  const status = useIsLoggedIn();
 
   {
     isLoading && <PlayersPageSkeleton />;
@@ -43,14 +48,14 @@ export default function PlayersPage() {
         </div>
       </header>
 
-      {/*<section className="container px-4 md:px-6 py-8 mx-auto">
+      {status === "authenticated" && (<section className="container px-4 md:px-6 pt-8 mx-auto">
         <Link href="/players/newPlayer">
           <button className="bg-primary hover:bg-primary-light hover:scale-105 transition-all duration-300 text-white px-4 py-2 rounded-md flex gap-2 items-center">
            <Plus className="w-4 h-4" />
             Agregar Jugador
           </button>
         </Link>
-      </section>*/}
+      </section>)}
 
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}

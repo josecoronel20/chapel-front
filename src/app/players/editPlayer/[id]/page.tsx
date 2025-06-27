@@ -9,77 +9,92 @@ import SportInfo from "./editPlayerComponents/SportInfo";
 import Statistics from "./editPlayerComponents/Statistics";
 import Habilities from "./editPlayerComponents/Habilities";
 import Achievements from "./editPlayerComponents/Achievements";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Player } from "@/lib/types";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 import { defaultValuesPlayer, playerObject } from "@/lib/formsObjects";
+import { editPlayer } from "@/lib/api/players";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
+import { formatBirthDate } from "@/lib/utils";
+import useRedirect from "@/hooks/useRedirect";
 
 export default function EditPlayerPage() {
+  useRedirect("editPlayer");
   const params = useParams();
   const id = parseInt(params.id as string);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(playerObject),
-    defaultValues: defaultValuesPlayer
+    defaultValues: defaultValuesPlayer,
   });
 
-  const { data, error, isLoading } = useSWR(`/data/dataPlayers.json`, fetcher);
-
-  const player: Player = data?.players.find(
-    (player: Player) => player.id === id
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/players/${id}`,
+    fetcher
   );
-
-  const arrayToString = (arr?: string[]) =>
-    Array.isArray(arr) && arr.length > 0 ? arr.join(", ") : "";
+  const player = data;
+  const { date } = formatBirthDate(player?.birthDate);
 
   useEffect(() => {
     if (player) {
       form.reset({
-        nombreCompleto: player?.fullName,
-        fechaNacimiento: player?.birthDate,
-        nacionalidad: player?.nationality,
-        ciudad: player?.city,
-        provincia: player?.province,
-        piernaHabil: player?.dominantFoot,
-        altura: player?.height,
-        peso: player?.weight,
-        imagen: player?.image,
-        urlVideo: player?.videoUrl,
-        posicionPrincipal: player?.mainPosition || "",
-        nivelActual: player?.currentLevel,
-        objetivo: player?.objective,
-        resumenPerfil: player?.profileSummary,
-        posicionesSecundarias: player?.secondaryPositions,
-        estadisticas: {
-          temporada: player?.stats.season,
-          partidos: player?.stats.matches,
-          goles: player?.stats.goals,
-          asistencias: player?.stats.assists,
-          tarjetasAmarillas: player?.stats.yellowCards,
-          tarjetasRojas: player?.stats.redCards,
-          golesRecibidos: player?.stats.goalsReceived,
-          vallasInvictas: player?.stats.cleanSheets,
+        fullName: player?.fullName,
+        birthDate: date,
+        nationality: player?.nationality,
+        city: player?.city,
+        province: player?.province,
+        dominantFoot: player?.dominantFoot || "Diestro",
+        transferStatus: player?.transferStatus ?? "Libre",
+        height: player?.height,
+        weight: player?.weight,
+        image: player?.image,
+        videoUrl: player?.videoUrl,
+        mainPosition: player?.mainPosition || "",
+        currentLevel: player?.currentLevel,
+        objective: player?.objective,
+        profileSummary: player?.profileSummary,
+        secondaryPositions: player?.secondaryPositions,
+        stats: {
+          season: player?.stats.season,
+          matches: player?.stats.matches,
+          goals: player?.stats.goals,
+          assists: player?.stats.assists,
+          yellowCards: player?.stats.yellowCards,
+          redCards: player?.stats.redCards,
+          goalsReceived: player?.stats.goalsReceived,
+          cleanSheets: player?.stats.cleanSheets,
         },
-        habilidades: {
-          tecnica: player?.skills.technique,
-          velocidad: player?.skills.speed,
-          fuerza: player?.skills.strength,
+        skills: {
+          technique: player?.skills.technique,
+          speed: player?.skills.speed,
+          strength: player?.skills.strength,
           vision: player?.skills.vision,
-          definicion: player?.skills.finishing,
-          pase: player?.skills.passing,
-          reflejos: player?.skills.reflexes,
-          salidaCentros: player?.skills.crossHandling,
-          unoContraUno: player?.skills.oneOnOnes,
-          juegoConLosPies: player?.skills.footWork,
-          liderazgo: player?.skills.leadership,
-          potenciaSaque: player?.skills.kickingPower,
+          finishing: player?.skills.finishing,
+          passing: player?.skills.passing,
+          reflexes: player?.skills.reflexes,
+          crossHandling: player?.skills.crossHandling,
+          oneOnOnes: player?.skills.oneOnOnes,
+          footWork: player?.skills.footWork,
+          leadership: player?.skills.leadership,
+          kickingPower: player?.skills.kickingPower,
         },
-        logros: player?.achievements,
-        estadoObservacion: player?.scoutingStatus,
-        clubesInteresados: player?.clubsInterested,
+        achievements: player?.achievements,
+        scoutingStatus: player?.scoutingStatus,
+        clubsInterested: player?.clubsInterested,
+        clubsHistory: player?.clubsHistory,
       });
+
+      console.log(player?.dominantFoot);
     }
   }, [player]);
 
@@ -90,9 +105,16 @@ export default function EditPlayerPage() {
     return <div>Error al cargar los datos</div>;
   }
 
-  const handleSubmit = (data: z.infer<typeof playerObject>) => {
-    const playerUpdated = { ...data, id: player?.id };
-    console.log(playerUpdated);
+  const handleSubmit = async (data: z.infer<typeof playerObject>) => {
+    //se vuelve a formatear la fecha para que sea ISO
+    const birthDateISO = new Date(data.birthDate).toISOString();
+
+    const playerUpdated = { ...data, birthDate: birthDateISO, id: player?.id };
+    const response = await editPlayer(id, playerUpdated);
+    if (response.status === 200) {
+      setIsOpen(true);
+    }
+    console.log(response);
   };
 
   return (
@@ -107,7 +129,12 @@ export default function EditPlayerPage() {
           </p>
         </div>
 
-        <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
+        <form
+          className="space-y-6"
+          onSubmit={form.handleSubmit(handleSubmit, (errors) => {
+            console.log(errors);
+          })}
+        >
           {/* Información Personal */}
           <PersonalInfo form={form} />
 
@@ -118,7 +145,7 @@ export default function EditPlayerPage() {
           <Statistics
             form={form}
             isGoalkeeper={form
-              .watch("posicionPrincipal")
+              .watch("mainPosition")
               .toLowerCase()
               .trim()
               .includes("arquero")}
@@ -139,6 +166,30 @@ export default function EditPlayerPage() {
             Guardar cambios
           </Button>
         </form>
+
+        {/* Dialog */}
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>¡Jugador editado exitosamente!</DialogTitle>
+              <DialogDescription>
+                <span className="text-lg">
+                  El jugador se editó correctamente.
+                </span>
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-end mt-4">
+              <Button
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push(`/players/${id}`);
+                }}
+              >
+                Aceptar
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </main>
   );

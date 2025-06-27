@@ -1,0 +1,103 @@
+import { z } from "zod";
+
+export const playerObject = z.object({
+    fullName: z.string().min(1, { message: "El nombre es requerido" }),
+    birthDate: z
+      .string()
+      .min(1, { message: "La fecha de nacimiento es requerida" }),
+    nationality: z
+      .string()
+      .min(1, { message: "La nacionalidad es requerida" }),
+    city: z.string().min(1, { message: "La ciudad es requerida" }),
+    province: z.string().min(1, { message: "La provincia es requerida" }),
+    height: z.string().min(1, { message: "La altura es requerida" }),
+    weight: z.string().min(1, { message: "El peso es requerido" }),
+    dominantFoot: z.enum(["Diestro", "Zurdo", "Ambidiestro"]),
+    transferStatus: z.enum(["Libre", "A préstamo", "Transferido", "En negociación"]),
+    mainPosition: z
+      .string()
+      .min(1, { message: "La posición principal es requerida" }),
+    secondaryPositions: z.array(z.string()).default([]),
+    profileSummary: z
+      .string()
+      .min(1, { message: "El resumen del perfil es requerido" }),
+    currentLevel: z.string().optional(),
+    objective: z.string().min(1, { message: "El objetivo es requerido" }),
+    image: z.string().optional(),
+    videoUrl: z.string().optional(),
+    scoutingStatus: z.string().default("No contactado por el momento"),
+    clubsInterested: z.array(z.string()).default([]),
+    clubsHistory: z.array(z.string()).default([]),
+    stats: z.object({
+      season: z.string().default(""),
+      matches: z.number().default(0),
+      goals: z.number().default(0),
+      assists: z.number().default(0),
+      yellowCards: z.number().default(0),
+      redCards: z.number().default(0),
+      goalsReceived: z.number().default(0),
+      cleanSheets: z.number().default(0),
+    }),
+    skills: z.object({
+      technique: z.number().default(0),
+      speed: z.number().default(0),
+      strength: z.number().default(0),
+      vision: z.number().default(0),
+      finishing: z.number().default(0),
+      passing: z.number().default(0),
+      reflexes: z.number().default(0),
+      crossHandling: z.number().default(0),
+      oneOnOnes: z.number().default(0),
+      footWork: z.number().default(0),
+      leadership: z.number().default(0),
+      kickingPower: z.number().default(0),
+    }),
+    achievements: z.array(z.string()).default([]),
+  });
+
+  export const defaultValuesPlayer: z.infer<typeof playerObject> = {
+    fullName: "",
+    birthDate: "",
+    nationality: "",
+    city: "",
+    province: "",
+    height: "",
+    weight: "",
+    dominantFoot: "Diestro",
+    transferStatus: "Libre",
+    mainPosition: "",
+    secondaryPositions: [],
+    profileSummary: "",
+    currentLevel: "",
+    objective: "",
+    image: "",
+    videoUrl: "",
+    scoutingStatus: "",
+    clubsInterested: [],
+    clubsHistory: [],
+    stats: {
+      season: "",
+      matches: 0,
+      goals: 0,
+      assists: 0,
+      yellowCards: 0,
+      redCards: 0,
+      goalsReceived: 0,
+      cleanSheets: 0,
+    },
+    skills: {
+      technique: 0,
+      speed: 0,
+      strength: 0,
+      vision: 0,
+      finishing: 0,
+      passing: 0,
+      reflexes: 0,
+      crossHandling: 0,
+      oneOnOnes: 0,
+      footWork: 0,
+      leadership: 0,
+      kickingPower: 0,
+    },
+    achievements: [],
+  };
