@@ -9,12 +9,16 @@ import useSWR from "swr";
 import PlayersPageSkeleton from "./playersComponents/PlayersPageSkeleton";
 import { fetcher } from "@/lib/utils";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import { Filter } from "./playersComponents/Filter";
 
 export default function PlayersPage() {
   //todo:agregar filtro
+  const [filter, setFilter] = useState("");
   const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/players`, fetcher);
   const players = data;
-  console.log(players);
+  const playersFiltered = filter !== "" ? players.filter((player: Player) => player.mainPosition.toLowerCase() === filter.toLowerCase() || player.secondaryPositions.some((position: string) => position.toLowerCase() === filter.toLowerCase())) : players;
+
+  console.log(playersFiltered);
 
   const status = useIsLoggedIn();
 
@@ -47,6 +51,8 @@ export default function PlayersPage() {
           </div>
         </div>
       </header>
+      
+      <Filter setFilter={setFilter} />
 
       {status === "authenticated" && (<section className="container px-4 md:px-6 pt-8 mx-auto">
         <Link href="/players/newPlayer">
@@ -60,7 +66,7 @@ export default function PlayersPage() {
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {players.map((player: Player) => (
+          {playersFiltered.map((player: Player) => (
             <Link href={`/players/${player.id}`} key={player.id}>
               <CardPlayer player={player} />
             </Link>

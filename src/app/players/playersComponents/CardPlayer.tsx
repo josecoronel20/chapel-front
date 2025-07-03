@@ -39,12 +39,26 @@ const CardPlayer = ({ player }: { player: Player }) => {
       </div>
 
       <CardContent className="p-4">
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           <div>
             <h3 className="font-bold text-lg text-primary-dark">
               {player.fullName}
             </h3>
-            <p className="text-primary-dark text-sm">{player.mainPosition}</p>
+            <div className="flex flex-col gap-3">
+              <Badge className="bg-secondary-light text-white text-sm w-fit">
+                {player.mainPosition}
+              </Badge>
+
+              {player.secondaryPositions && (
+                <div className="flex gap-2 w-full overflow-hidden">
+                  {player.secondaryPositions.map((secondPosition) => (
+                    <p className="text-primary-dark text-xs rounded text-gray-400">
+                      {secondPosition}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center justify-between text-sm text-primary-dark">
