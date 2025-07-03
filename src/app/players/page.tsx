@@ -59,7 +59,7 @@ export default function PlayersPage() {
 
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {players.map((player: Player) => (
             <Link href={`/players/${player.id}`} key={player.id}>
               <CardPlayer player={player} />

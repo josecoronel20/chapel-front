@@ -11,7 +11,7 @@ const CardPlayer = ({ player }: { player: Player }) => {
   return (
     <Card
       key={player.id}
-      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full relative"
+      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full relative max-w-xs mx-auto"
     >
       <div className="relative">
         {player.image ? (
@@ -20,7 +20,7 @@ const CardPlayer = ({ player }: { player: Player }) => {
             alt={player.fullName}
             width={250}
             height={300}
-            className="w-full h-48 object-cover rounded-t-lg"
+            className="w-full h-48 object-cover object-top rounded-t-lg"
           />
         ) : (
           <User className="w-full h-48 object-cover text-primary-dark" />

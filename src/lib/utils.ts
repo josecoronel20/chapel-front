@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { supabase } from "./supabaseClient";
 
 //utils
 export function cn(...inputs: ClassValue[]) {
@@ -45,3 +46,4 @@ export function formatBirthDate(birthDateString: string) {
     age,
   };
 }
+

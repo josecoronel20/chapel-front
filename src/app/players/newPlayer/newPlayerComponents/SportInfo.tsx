@@ -11,10 +11,9 @@ import {
 } from "@/components/ui/select";
 import { Controller, UseFormReturn } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
+import ControllerArrayInput from "../../playersComponents/ControllerArrayInput";
 
 const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
-
-
   const handleClubsInterested = (e: React.ChangeEvent<HTMLInputElement>) => {
     const clubsInterested = e.target.value.includes(",")
       ? e.target.value.split(",")
@@ -31,7 +30,6 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
           {/* Posición Principal */}
           <div>
             <Label htmlFor="mainPosition" className="text-text-light">
@@ -122,12 +120,12 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
               Estado de Observación
             </Label>
             <Textarea
-            id="scoutingStatus"
-            {...form.register("scoutingStatus")}
-            className="bg-bg border-primary/30 text-text"
-            rows={2}
-            placeholder="Estado de observación..."
-          />
+              id="scoutingStatus"
+              {...form.register("scoutingStatus")}
+              className="bg-bg border-primary/30 text-text"
+              rows={2}
+              placeholder="Estado de observación..."
+            />
           </div>
         </div>
 
@@ -140,23 +138,11 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
             </p>
           </div>
           <div className="flex gap-2 mb-2">
-            <Controller
-              control={form.control}
-              name="clubsInterested"
-              render={({ field }) => (
-                <Input
-                  id="clubsInterested"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    const clubsInterested = value.includes(",")
-                      ? value.split(",").map((v) => v.trim())
-                      : [value.trim()];
-                    field.onChange(clubsInterested);
-                  }}
-                  className="bg-bg border-primary/30 text-text"
-                  placeholder="Nombre del club o clubes"
-                />
-              )}
+            <ControllerArrayInput
+              form={form}
+              propToModify="clubsInterested"
+              placeholder="Nombre del club o clubes"
+              isEditPage={false}
             />
           </div>
         </div>
@@ -170,27 +156,11 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
             </p>
           </div>
           <div className="flex gap-2 mb-2">
-            <Controller
-              control={form.control}
-              name="clubsHistory"
-              render={({ field }) => (
-                <Input
-                  id="clubsHistory"
-                  onChange={(e) => {
-                    const value = e.target.value;
-            
-                    // Aquí procesas la versión escrita para convertirla en array
-                    const clubsHistory = value
-                      .split(",")                // Separa por comas
-                      .map((v) => v.trim())      // Elimina espacios sobrantes alrededor
-                      .filter((v) => v.length);  // Elimina elementos vacíos
-            
-                    field.onChange(clubsHistory);
-                  }}
-                  className="bg-bg border-primary/30 text-text"
-                  placeholder="Nombre del club o clubes"
-                />
-              )}
+            <ControllerArrayInput
+              form={form}
+              propToModify="clubsHistory"
+              placeholder="Nombre del club o clubes"
+              isEditPage={false}
             />
           </div>
         </div>

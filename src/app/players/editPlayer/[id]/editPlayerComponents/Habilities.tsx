@@ -8,6 +8,21 @@ const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
   // 👇 Ahora usamos watch para obtener todas las habilidades actuales
   const skills = form.watch("skills");
 
+  const skillNames = {
+    technique: "Técnica",
+    speed: "Velocidad",
+    strength: "Fuerza",
+    vision: "Visión",
+    finishing: "Finalización",
+    passing: "Pase",
+    reflexes: "Reflejos",
+    crossHandling: "Control de balón",
+    oneOnOnes: "1 vs 1",
+    footWork: "Juego con los pies",
+    leadership: "Liderazgo",
+    kickingPower: "Potencia de saque",
+  }
+
   return (
     <Card className="bg-bg-alt border-primary/20">
       <CardHeader>
@@ -24,7 +39,7 @@ const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
                   <Label className="text-text-light capitalize">
-                    {skill.replace(/([A-Z])/g, " $1").trim()}
+                    {skillNames[skill as keyof typeof skillNames] || skill}
                   </Label>
                   {(skill === "reflejos" ||
                     skill === "salidaCentros" ||

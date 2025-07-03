@@ -11,8 +11,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Controller, UseFormReturn } from "react-hook-form";
+import { ImgAndVideo } from "./ImgAndVideo";
 
-const PersonalInfo = ({ form }: { form: UseFormReturn<any> }) => {
+const PersonalInfo = ({ form, setIsUploading }: { form: UseFormReturn<any>, setIsUploading: (isUploading: boolean) => void }) => {
   return (
     <Card className="bg-bg-alt border-primary/20">
       <CardHeader>
@@ -162,30 +163,8 @@ const PersonalInfo = ({ form }: { form: UseFormReturn<any> }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="image" className="text-text-light">
-              URL de Imagen
-            </Label>
-            <Input
-              id="image"
-              {...form.register("image")}
-              className="bg-bg border-primary/30 text-text"
-              placeholder="https://..."
-            />
-          </div>
-          <div>
-            <Label htmlFor="videoUrl" className="text-text-light">
-              URL de Video (Opcional)
-            </Label>
-            <Input
-              id="videoUrl"
-              {...form.register("videoUrl")}
-              className="bg-bg border-primary/30 text-text"
-              placeholder="https://..."
-            />
-          </div>
-        </div>
+        {/* Imagen y video */}
+        <ImgAndVideo form={form} setIsUploading={setIsUploading} />
       </CardContent>
     </Card>
   );

@@ -23,10 +23,10 @@ export default function LoginChapel() {
 
 
   const User = z.object({
-    username: z
+    email: z
       .string()
-      .min(5, { message: "El usuario debe tener al menos 5 caracteres" })
-      .max(15, { message: "El usuario debe tener menos de 15 caracteres" }),
+      .min(5, { message: "El email debe tener al menos 5 caracteres" })
+      .email({ message: "El email no es válido" }),
     password: z
       .string()
       .min(5, { message: "La contraseña debe tener al menos 5 caracteres" })
@@ -36,13 +36,13 @@ export default function LoginChapel() {
   const form = useForm<z.infer<typeof User>>({
     resolver: zodResolver(User),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
   const onSubmit = async (data: z.infer<typeof User>) => {
-    const response = await login(data.username, data.password);
+    const response = await login(data.email, data.password);
     if (response.status === 200) {
       router.push("/players");
     } else {
@@ -79,19 +79,19 @@ export default function LoginChapel() {
         <CardContent className="space-y-6">
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-text-light">
-                Usuario
+              <Label htmlFor="email" className="text-text-light">
+                Email
               </Label>
               <Input
-                id="username"
+                id="email"
                 type="text"
-                placeholder="Ingresa tu usuario"
+                placeholder="Ingresa tu email"
                 className="bg-bg border-none text-text placeholder:text-text-muted focus:border-secondary focus:ring-secondary/20"
-                {...form.register("username")}
+                {...form.register("email")}
               />
-              {form.formState.errors.username && (
+              {form.formState.errors.email && (
                 <p className="text-red-500">
-                  {form.formState.errors.username.message}
+                  {form.formState.errors.email.message}
                 </p>
               )}
             </div>

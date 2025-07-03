@@ -32,6 +32,9 @@ export default function EditPlayerPage() {
   const params = useParams();
   const id = parseInt(params.id as string);
   const [isOpen, setIsOpen] = useState(false);
+
+  //estado para saber si se esta subiendo un archivo
+  const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(playerObject),
@@ -93,8 +96,6 @@ export default function EditPlayerPage() {
         clubsInterested: player?.clubsInterested,
         clubsHistory: player?.clubsHistory,
       });
-
-      console.log(player?.dominantFoot);
     }
   }, [player]);
 
@@ -107,6 +108,7 @@ export default function EditPlayerPage() {
 
   const handleSubmit = async (data: z.infer<typeof playerObject>) => {
     //se vuelve a formatear la fecha para que sea ISO
+    console.log("data", data);
     const birthDateISO = new Date(data.birthDate).toISOString();
 
     const playerUpdated = { ...data, birthDate: birthDateISO, id: player?.id };
@@ -136,7 +138,7 @@ export default function EditPlayerPage() {
           })}
         >
           {/* Información Personal */}
-          <PersonalInfo form={form} />
+          <PersonalInfo form={form} setIsUploading={setIsUploading} />
 
           {/* Información Deportiva */}
           <SportInfo form={form} />
@@ -159,12 +161,16 @@ export default function EditPlayerPage() {
 
           {/* Botones de acción */}
 
-          <Button
-            type="submit"
-            className="bg-secondary hover:bg-secondary-light text-primary-darker font-medium"
-          >
-            Guardar cambios
-          </Button>
+          <div className="flex items-center gap-2 w-full justify-center">
+            <Button
+              type="submit"
+              className="bg-secondary hover:bg-secondary-light text-primary-darker font-medium"
+              disabled={isUploading}
+            >
+              Guardar cambios
+            </Button>
+            {isUploading && <p>Cargando video...</p>}
+          </div>
         </form>
 
         {/* Dialog */}
