@@ -2,15 +2,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { supabase } from "@/lib/supabaseClient";
 import { deleteFile, uploadFile } from "@/lib/api/supabaseFiles";
 
 export const ImgAndVideo = ({
+  typePage,
   form,
   setIsUploading,
+  isUploading,
 }: {
+  typePage: "newPlayer" | "editPlayer";
   form: UseFormReturn<any>;
   setIsUploading: (isUploading: boolean) => void;
+  isUploading: boolean;
 }) => {
   const { setValue, register, watch } = form;
 
@@ -18,13 +21,14 @@ export const ImgAndVideo = ({
     e: React.ChangeEvent<HTMLInputElement>,
     typeFile: "image" | "videoUrl"
   ) => {
-    setIsUploading(true);
+    if (!isUploading) {
+      setIsUploading(true);
+    }
     const file = e.target.files?.[0];
     if (!file) return;
 
     // Elimina archivo anterior si existe
-    // Elimina archivo anterior si existe
-    if (watch(typeFile)) {
+    if (typePage === "editPlayer" && watch(typeFile)) {
       try {
         const response = await deleteFile(watch(typeFile));
         console.log("response", response);
@@ -35,8 +39,7 @@ export const ImgAndVideo = ({
 
     
     try {
-      const res = await uploadFile(file);
-  
+      const res = await uploadFile(file);  
       if (res.publicUrl) {
         setValue(typeFile, res.publicUrl, {
           shouldValidate: true,
@@ -60,10 +63,14 @@ export const ImgAndVideo = ({
         <Label
           htmlFor="image"
           className={
-            watch("image") ? "text-secondary-light" : "text-text-light"
+            typePage === "editPlayer" && watch("image")
+              ? "text-secondary-light"
+              : "text-text-light"
           }
         >
-          {watch("image") ? "Imagen Cargada" : "Cargar Imagen (Opcional)"}
+          {typePage === "editPlayer" && watch("image")
+            ? "Imagen Cargada"
+            : "Cargar Imagen (Opcional)"}
         </Label>
 
         <Input
@@ -81,10 +88,14 @@ export const ImgAndVideo = ({
         <Label
           htmlFor="videoUrl"
           className={
-            watch("videoUrl") ? "text-secondary-light" : "text-text-light"
+            typePage === "editPlayer" && watch("videoUrl")
+              ? "text-secondary-light"
+              : "text-text-light"
           }
         >
-          {watch("videoUrl") ? "Video Cargado" : "Cargar Video (Opcional)"}
+          {typePage === "editPlayer" && watch("videoUrl")
+            ? "Video Cargado"
+            : "Cargar Video (Opcional)"}
         </Label>
 
         <Input

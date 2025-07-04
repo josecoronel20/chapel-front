@@ -2,24 +2,24 @@ import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 import { Target } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+
 import { Controller, UseFormReturn } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
-import ControllerArrayInput from "../../playersComponents/ControllerArrayInput";
+import ControllerArrayInput from "@/app/players/formComponent/ControllerArrayInput";
+import {
+  Accordion,
+  AccordionTrigger,
+  AccordionContent,
+  AccordionItem,
+} from "@/components/ui/accordion";
 
-const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
-  const handleClubsInterested = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const clubsInterested = e.target.value.includes(",")
-      ? e.target.value.split(",")
-      : [e.target.value];
-    form.setValue("clubsInterested", clubsInterested);
-  };
+const SportInfo = ({
+  form,
+  typePage,
+}: {
+  form: UseFormReturn<any>;
+  typePage: "newPlayer" | "editPlayer";
+}) => {
   return (
     <Card className="bg-bg-alt border-primary/20">
       <CardHeader>
@@ -30,29 +30,46 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Posición Principal */}
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full"
+            defaultValue="posiciones"
+          >
+            <AccordionItem value="posiciones">
+              <AccordionTrigger className="text-text-light">
+                Posiciones permitidas por el filtro
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-4 text-balance">
+                <ul className="list-inside space-y-1 text-text-light text-xs">
+                  <li>-Arquero</li>
+                  <li>-Lateral izquierdo</li>
+                  <li>-Lateral derecho</li>
+                  <li>-Central (defensa central)</li>
+                  <li>-Mediocampista defensivo (volante de contención)</li>
+                  <li>-Mediocampista por izquierda (volante por izquierda)</li>
+                  <li>-Mediocampista central (volante central)</li>
+                  <li>-Mediocampista por derecha (volante por derecha)</li>
+                  <li>-Mediocampista ofensivo (enganche)</li>
+                  <li>-Segundo delantero (media punta)</li>
+                  <li>-Delantero centro (número 9)</li>
+                  <li>-Extremo por izquierda (punta izquierda)</li>
+                  <li>-Extremo por derecha (punta derecha)</li>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
           <div>
             <Label htmlFor="mainPosition" className="text-text-light">
               Posición Principal
             </Label>
             <Input
               id="mainPosition"
+              
               {...form.register("mainPosition")}
               className="bg-bg border-primary/30 text-text"
               placeholder="Posición principal"
-            />
-          </div>
-
-          {/* Nivel Actual */}
-          <div>
-            <Label htmlFor="currentLevel" className="text-text-light">
-              Nivel Actual
-            </Label>
-            <Input
-              id="currentLevel"
-              {...form.register("currentLevel")}
-              className="bg-bg border-primary/30 text-text"
-              placeholder="Juvenil A, Primera División, etc."
             />
           </div>
         </div>
@@ -64,24 +81,22 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
             Si hay más de una posición sepáralas por comas
           </p>
         </div>
-        <div className="flex gap-2 mb-2">
-          <Controller
-            control={form.control}
-            name="secondaryPositions"
-            render={({ field }) => (
-              <Input
-                id="secondaryPositions"
-                onChange={(e) => {
-                  const value = e.target.value;
-                  const secondaryPositions = value.includes(",")
-                    ? value.split(",").map((v) => v.trim())
-                    : [value.trim()];
-                  field.onChange(secondaryPositions);
-                }}
-                className="bg-bg border-primary/30 text-text"
-                placeholder="Delantero, Extremo..."
-              />
-            )}
+        <ControllerArrayInput
+            form={form}
+            propToModify="secondaryPositions"
+            placeholder="Delantero, Extremo..."
+          />
+
+        {/*current level*/}
+        <div>
+          <Label htmlFor="currentLevel" className="text-text-light">
+            Categoría Actual
+          </Label>
+          <Input
+            id="currentLevel"
+            {...form.register("currentLevel")}
+            className="bg-bg border-primary/30 text-text"
+            placeholder="Juvenil A, Juvenil B, etc."
           />
         </div>
 
@@ -92,6 +107,7 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
           </Label>
           <Textarea
             id="profileSummary"
+            
             {...form.register("profileSummary")}
             className="bg-bg border-primary/30 text-text"
             rows={3}
@@ -99,9 +115,8 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
           />
         </div>
 
-        {/* Objetivos */}
         <div>
-          <Label htmlFor="objective" className="text-text-light">
+          <Label htmlFor="objetivo" className="text-text-light">
             Objetivos
           </Label>
           <Textarea
@@ -117,10 +132,11 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="scoutingStatus" className="text-text-light">
-              Estado de Observación
+              Estado de Observación por algun club
             </Label>
             <Textarea
               id="scoutingStatus"
+              
               {...form.register("scoutingStatus")}
               className="bg-bg border-primary/30 text-text"
               rows={2}
@@ -137,14 +153,12 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
               Si hay más de un club sepáralos por comas
             </p>
           </div>
-          <div className="flex gap-2 mb-2">
-            <ControllerArrayInput
-              form={form}
-              propToModify="clubsInterested"
-              placeholder="Nombre del club o clubes"
-              isEditPage={false}
-            />
-          </div>
+          <ControllerArrayInput
+            form={form}
+            propToModify="clubsInterested"
+            placeholder="Nombre del club o clubes"
+            
+          />
         </div>
 
         {/* Clubes Historial */}
@@ -155,14 +169,12 @@ const SportInfo = ({ form }: { form: UseFormReturn<any> }) => {
               Si hay más de un club sepáralos por comas
             </p>
           </div>
-          <div className="flex gap-2 mb-2">
-            <ControllerArrayInput
-              form={form}
-              propToModify="clubsHistory"
-              placeholder="Nombre del club o clubes"
-              isEditPage={false}
-            />
-          </div>
+          <ControllerArrayInput
+            form={form}
+            propToModify="clubsHistory"
+            placeholder="Nombre del club o clubes"
+            
+          />
         </div>
       </CardContent>
     </Card>

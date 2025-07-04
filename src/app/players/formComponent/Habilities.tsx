@@ -4,7 +4,13 @@ import { Label } from "@/components/ui/label";
 import { UseFormReturn, Controller } from "react-hook-form";
 import { Slider } from "@/components/ui/slider";
 
-const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
+const Habilities = ({
+  form,
+  typePage,
+}: {
+  form: UseFormReturn<any>;
+  typePage: "newPlayer" | "editPlayer";
+}) => {
   // 👇 Ahora usamos watch para obtener todas las habilidades actuales
   const skills = form.watch("skills");
 
@@ -13,10 +19,10 @@ const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
     speed: "Velocidad",
     strength: "Fuerza",
     vision: "Visión",
-    finishing: "Finalización",
+    finishing: "Definición",
     passing: "Pase",
     reflexes: "Reflejos",
-    crossHandling: "Control de balón",
+    crossHandling: "Manejo en el aire",
     oneOnOnes: "1 vs 1",
     footWork: "Juego con los pies",
     leadership: "Liderazgo",
@@ -34,7 +40,7 @@ const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {Object.entries(skills || {}).map(([skill, value]) => (
+            {Object.entries(skills || {}).map(([skill, value]) => (
             <div key={skill} className="space-y-2">
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
@@ -56,11 +62,11 @@ const Habilities = ({ form }: { form: UseFormReturn<any> }) => {
                 <span className="text-secondary font-medium">{Number(value)}</span>
               </div>
               <Controller
-                name={`skills.${skill}`} 
+                name={`skills.${skill}`}
                 control={form.control}
                 render={({ field }) => (
                   <Slider
-                    value={[Number(value)]}
+                    value={typePage === "editPlayer" ? [Number(value)] : [0]}
                     onValueChange={(newValue) => {
                       field.onChange(newValue[0]);
                     }}

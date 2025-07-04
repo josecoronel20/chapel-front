@@ -7,9 +7,11 @@ import { UseFormReturn } from "react-hook-form";
 const Statistics = ({
   form,
   isGoalkeeper,
+  typePage,
 }: {
   form: UseFormReturn<any>;
   isGoalkeeper: boolean;
+  typePage: "newPlayer" | "editPlayer";
 }) => {
   return (
     <Card className="bg-bg-alt border-primary/20">
@@ -34,7 +36,7 @@ const Statistics = ({
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <Label htmlFor="matches" className="text-text-light">
+            <Label htmlFor="partidos" className="text-text-light">
               Partidos
             </Label>
             <Input
@@ -72,7 +74,7 @@ const Statistics = ({
           ) : (
             <>
               <div>
-                <Label htmlFor="goals" className="text-text-light">
+                <Label htmlFor="goles" className="text-text-light">
                   Goles
                 </Label>
                 <Input

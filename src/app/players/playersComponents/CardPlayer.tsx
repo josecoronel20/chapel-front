@@ -50,12 +50,19 @@ const CardPlayer = ({ player }: { player: Player }) => {
               </Badge>
 
               {player.secondaryPositions && (
-                <div className="flex gap-2 w-full overflow-hidden">
-                  {player.secondaryPositions.map((secondPosition) => (
-                    <p className="text-primary-dark text-xs rounded text-gray-400">
+                <div className="flex gap-2 w-full overflow-hidden flex-wrap">
+                  {/* muestra la primera posición secundaria */}
+                  {player.secondaryPositions.slice(0, 1).map((secondPosition) => (
+                    <p key={secondPosition} className="text-primary-dark text-xs rounded w-fit text-gray-400 bg-primary-light/20 p-1">
                       {secondPosition}
                     </p>
                   ))}
+                  {/* si hay mas de una posición secundaria, muestra el numero de posiciones restantes */}
+                  {player.secondaryPositions.length > 1 && (
+                    <p className="text-primary-dark text-xs rounded w-fit text-gray-400 bg-primary-light/20 p-1">
+                      +{player.secondaryPositions.length - 1}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -78,7 +85,7 @@ const CardPlayer = ({ player }: { player: Player }) => {
 
           <div className="pt-3 border-t">
             <p className="text-xs text-slate-600 mb-2 ">Interés de clubes:</p>
-            {player.clubsInterested && player.clubsInterested.length > 0 ? (
+            {player.clubsInterested && player.clubsInterested.length > 0 && player.clubsInterested[0] !== "" ? (
               <div className="flex flex-wrap gap-1">
                 {player.clubsInterested.map((club: string, index: number) => (
                   <Badge key={index} variant="outline" className="text-xs">

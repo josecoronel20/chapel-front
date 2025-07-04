@@ -11,7 +11,7 @@ export const Filter = ({
         <h1 className="text-primary-dark font-bold">Filtrar por posición</h1>
 
         <select
-          className="bg-primary-light p-2 rounded-md border-primary/30 text-text cursor-pointer"
+          className="bg-primary-light p-2 rounded-md border-primary/30 text-text cursor-pointer w-full overflow-hidden"
           name="posicion"
           id="posicion"
           onChange={(e) => setFilter(e.target.value)}
@@ -20,19 +20,32 @@ export const Filter = ({
           <option value="arquero">Arquero</option>
           <option value="lateral izquierdo">Lateral izquierdo</option>
           <option value="lateral derecho">Lateral derecho</option>
-          <option value="central">Central</option>
-          <option value="volante central">Volante central</option>
-          <option value="volante ofensivo">Volante ofensivo</option>
-          <option value="volante defensivo">
-            Volante de contención (defensivo)
+          <option value="central">Central (defensa central)</option>
+          <option value="mediocampista defensivo">
+            Mediocampista defensivo (volante de contención)
           </option>
-          <option value="mediocampista">Mediocampista</option>
-          <option value="enganche">Mediocampista ofensivo (enganche)</option>
-
-          <option value="delantero centro">Delantero centro</option>
-          <option value="media punta">Segundo delantero (media punta)</option>
-          <option value="extremo izquierdo">Extremo izquierdo</option>
-          <option value="extremo derecho">Extremo derecho</option>
+          <option value="mediocampista izquierdo">
+            Mediocampista por izquierda (volante por izquierda)
+          </option>
+          <option value="mediocampista central">
+            Mediocampista central (volante central)
+          </option>
+          <option value="mediocampista derecho">
+            Mediocampista por derecha (volante por derecha)
+          </option>
+          <option value="mediocampista ofensivo">
+            Mediocampista ofensivo (enganche)
+          </option>
+          <option value="segundo delantero">
+            Segundo delantero (media punta)
+          </option>
+          <option value="delantero centro">Delantero centro (número 9)</option>
+          <option value="extremo izquierdo">
+            Extremo por izquierda (punta izquierda)
+          </option>
+          <option value="extremo derecho">
+            Extremo por derecha (punta derecha)
+          </option>
         </select>
       </div>
     </div>

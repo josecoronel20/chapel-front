@@ -26,7 +26,7 @@ const ScoutingInfo = ({
               Clubes Interesados
             </h4>
             <div className="space-y-2">
-              {clubsInterested.length > 0 ? clubsInterested.map((club, index) => (
+              {clubsInterested.length > 0 && clubsInterested[0] !== "" ? clubsInterested.map((club, index) => (
                 <Badge key={index} variant="outline" className="mr-2 mb-2">
                   {club}
                 </Badge>

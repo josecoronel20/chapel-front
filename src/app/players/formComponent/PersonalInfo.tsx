@@ -13,7 +13,17 @@ import {
 import { Controller, UseFormReturn } from "react-hook-form";
 import { ImgAndVideo } from "./ImgAndVideo";
 
-const PersonalInfo = ({ form, setIsUploading }: { form: UseFormReturn<any>, setIsUploading: (isUploading: boolean) => void }) => {
+const PersonalInfo = ({
+  form,
+  setIsUploading,
+  typePage,
+  isUploading,
+}: {
+  form: UseFormReturn<any>;
+  setIsUploading: (isUploading: boolean) => void;
+  typePage: "newPlayer" | "editPlayer";
+  isUploading: boolean;
+}) => {
   return (
     <Card className="bg-bg-alt border-primary/20">
       <CardHeader>
@@ -46,7 +56,7 @@ const PersonalInfo = ({ form, setIsUploading }: { form: UseFormReturn<any>, setI
                 <Input
                   id="birthDate"
                   type="date"
-                  value={field.value ?? ""}
+                  value={field.value || ""}
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
@@ -90,33 +100,11 @@ const PersonalInfo = ({ form, setIsUploading }: { form: UseFormReturn<any>, setI
             />
           </div>
           <div>
-            <Label htmlFor="dominantFoot" className="text-text-light">
-              Pierna Hábil
-            </Label>
-            <Controller
-              key={form.watch("dominantFoot")}
-              control={form.control}
-              name="dominantFoot"
-              render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger className="bg-bg border-primary/30 text-text">
-                    <SelectValue placeholder="Seleccione la pierna" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-bg-alt border-primary/30">
-                    <SelectItem value="Diestro">Diestro</SelectItem>
-                    <SelectItem value="Zurdo">Zurdo</SelectItem>
-                    <SelectItem value="Ambidiestro">Ambidiestro</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-          </div>
-          <div>
             <Label htmlFor="transferStatus" className="text-text-light">
               Estado de pase
             </Label>
             <Controller
-              key={form.watch("transferStatus")}
+              key={typePage === "editPlayer" ? form.watch("transferStatus") : ""}
               control={form.control}
               name="transferStatus"
               render={({ field }) => (
@@ -163,8 +151,36 @@ const PersonalInfo = ({ form, setIsUploading }: { form: UseFormReturn<any>, setI
           </div>
         </div>
 
+        <div>
+            <Label htmlFor="dominantFoot" className="text-text-light">
+              Pierna Hábil
+            </Label>
+            <Controller
+              key={typePage === "editPlayer" ? form.watch("dominantFoot") : ""}
+              control={form.control}
+              name="dominantFoot"
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="bg-bg border-primary/30 text-text">
+                    <SelectValue placeholder="Seleccione la pierna" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-bg-alt border-primary/30">
+                    <SelectItem value="Diestro">Diestro</SelectItem>
+                    <SelectItem value="Zurdo">Zurdo</SelectItem>
+                    <SelectItem value="Ambidiestro">Ambidiestro</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+
         {/* Imagen y video */}
-        <ImgAndVideo form={form} setIsUploading={setIsUploading} />
+        <ImgAndVideo
+          form={form}
+          setIsUploading={setIsUploading}
+          typePage={typePage}
+          isUploading={isUploading}
+        />
       </CardContent>
     </Card>
   );
