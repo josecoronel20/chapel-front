@@ -1,58 +1,96 @@
-import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+"use client";
+
+import { TrendingUp } from "lucide-react";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 import { Player } from "@/lib/types";
 
 const TecnicEvaluation = ({ playerInfo }: { playerInfo: Player }) => {
-  const skillsArray = Object.entries(playerInfo.skills);
+  const chartData = Object.entries(playerInfo.skills).map(([key, value]) => {
+    if (value !== 0 && key !== "id") {
+      if (key === "technique") {
+        key = "Técnica";
+      } else if (key === "speed") {
+        key = "Velocidad";
+      } else if (key === "strength") {
+        key = "Fuerza";
+      } else if (key === "vision") {
+        key = "Visión";
+      } else if (key === "finishing") {
+        key = "Definición";
+      } else if (key === "passing") {
+        key = "Pase";
+      } else if (key === "reflexes") {
+        key = "Reflejos";
+      } else if (key === "crossHandling") {
+        key = "Salidas en centros";
+      } else if (key === "oneOnOnes") {
+        key = "1v1";
+      } else if (key === "footWork") {
+        key = "Trabajo de pies";
+      } else if (key === "leadership") {
+        key = "Liderazgo";
+      } else if (key === "kickingPower") {
+        key = "Potencia de chute";
+      }
+      return {
+        name: key,
+        value: value as number,
+      };
+    }
+  });
 
+  const chartConfig = {
+    name: {
+      label: "Habilidad",
+      color: "var(--color-primary)",
+    },
+  } satisfies ChartConfig;
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="items-center pb-4">
         <CardTitle>Evaluación Técnica</CardTitle>
+        <CardDescription className="text-center text-sm md:text-base">
+          Evaluación del jugador según sus habilidades técnicas
+        </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {skillsArray.map(([skill, value]) => {
-          if (value > 0 && skill !== "id") {
-            return (
-              <div key={skill} className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm font-medium capitalize">
-                    {skill === "technique"
-                      ? "Técnica"
-                      : skill === "speed"
-                      ? "Velocidad"
-                      : skill === "strength"
-                      ? "Fuerza"
-                      : skill === "vision"
-                      ? "Visión"
-                      : skill === "finishing"
-                      ? "Definición"
-                      : skill === "passing"
-                      ? "Pase"
-                      : skill === "reflexes"
-                      ? "Reflejos"
-                      : skill === "crossHandling"
-                      ? "Salida"
-                      : skill === "oneOnOnes"
-                      ? "1v1"
-                      : skill === "footWork"
-                      ? "Trabajo de pies"
-                      : skill === "kickingPower"
-                      ? "Potencia de saque"
-                      : skill === "leadership"
-                      ? "Liderazgo"
-                      : null}
-                  </span>
-
-                  <span className="text-sm text-slate-600">
-                    {value as number}%
-                  </span>
-                </div>
-                <Progress value={value as number} className="h-2" />
-              </div>
-            );
-          }
-        })}
+      <CardContent className="pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto w-full h-full"
+        >
+          <RadarChart data={chartData}>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <PolarGrid gridType="circle" />
+            <PolarAngleAxis dataKey="name" />
+            <Radar
+              dataKey="value"
+              fill="var(--color-primary)"
+              fillOpacity={0.6}
+              dot={{
+                r: 4,
+                fillOpacity: 1,
+              }}
+            />
+          </RadarChart>
+        </ChartContainer>
       </CardContent>
     </Card>
   );
