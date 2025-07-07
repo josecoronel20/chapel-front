@@ -14,21 +14,36 @@ import { Filter } from "./playersComponents/Filter";
 export default function PlayersPage() {
   //todo:agregar filtro
   const [filter, setFilter] = useState("");
-  const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/players`, fetcher);
-  const players = data;
-  const playersFiltered = filter !== "" ? players.filter((player: Player) => player.mainPosition.toLowerCase() === filter.toLowerCase() || player.secondaryPositions.some((position: string) => position.toLowerCase() === filter.toLowerCase())) : players;
-
-  console.log(playersFiltered);
+  const { data, isLoading, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/players`,
+    fetcher
+  );
 
   const status = useIsLoggedIn();
 
-  {
-    isLoading && <PlayersPageSkeleton />;
+  if (isLoading || !data) {
+    return <PlayersPageSkeleton />;
+  }
+  if (error) {
+    return (
+      <div className="text-center text-primary-dark text-2xl font-bold mt-10 h-screen">
+        Error al cargar los jugadores
+      </div>
+    );
   }
 
-  if (error || !data) {
-    return <div>Error al cargar los jugadores</div>;
-  }
+  const players = data;
+  const playersFiltered =
+    filter !== ""
+      ? players.filter(
+          (player: Player) =>
+            player.mainPosition.toLowerCase() === filter.toLowerCase() ||
+            player.secondaryPositions.some(
+              (position: string) =>
+                position.toLowerCase() === filter.toLowerCase()
+            )
+        )
+      : players;
 
   return (
     <main className="min-h-screen bg-purple-100 pt-16">
@@ -51,17 +66,21 @@ export default function PlayersPage() {
           </div>
         </div>
       </header>
-      
-      <Filter setFilter={setFilter} />
 
-      {status === "authenticated" && (<section className="container px-4 md:px-6 pt-8 mx-auto">
-        <Link href="/players/newPlayer">
-          <button className="bg-primary hover:bg-primary-light hover:scale-105 transition-all duration-300 text-white px-4 py-2 rounded-md flex gap-2 items-center">
-           <Plus className="w-4 h-4" />
-            Agregar Jugador
-          </button>
-        </Link>
-      </section>)}
+      <div className="container px-4 md:px-6 py-8 mx-auto md:flex md:items-end">
+        <Filter setFilter={setFilter} />
+
+        {status === "authenticated" && (
+          <section className="container mx-auto p-6 ">
+            <Link href="/players/newPlayer">
+              <button className="bg-primary hover:bg-primary-light hover:scale-105 transition-all duration-300 text-white px-4 py-2 w-full rounded-md flex gap-2 items-center">
+                <Plus className="w-4 h-4" />
+                Agregar Jugador
+              </button>
+            </Link>
+          </section>
+        )}
+      </div>
 
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}

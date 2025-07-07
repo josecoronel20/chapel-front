@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const CardPlayerSkeleton = () => {
   return (
     <Card
-      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full"
+      className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white  cursor-pointer hover:scale-105 ease-in-out hover:shadow-primary-dark/20 h-full relative w-full max-w-xs mx-auto"
     >
       <div className="relative">
         <Skeleton className="w-full h-48 object-cover rounded-t-lg" />
@@ -20,9 +20,7 @@ const CardPlayerSkeleton = () => {
             <h3 className="font-bold text-lg text-primary-dark">
               <Skeleton className="w-full h-4 rounded-md" />
             </h3>
-            <p className="text-primary-dark text-sm">
-              <Skeleton className="w-full h-4 rounded-md" />
-            </p>
+            <Skeleton className="w-full h-4 rounded-md" />
           </div>
 
           <div className="flex items-center justify-between text-sm text-primary-dark">

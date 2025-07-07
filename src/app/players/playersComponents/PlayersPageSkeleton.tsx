@@ -1,6 +1,6 @@
 "use client";
 
-import { Trophy } from "lucide-react";
+import { Loader2, Trophy } from "lucide-react";
 import CardPlayerSkeleton from "./CardPlayerSkeleton";
 
 export default function PlayersPageSkeleton() {
@@ -26,9 +26,18 @@ export default function PlayersPageSkeleton() {
         </div>
       </header>
 
+      <section className="flex items-center justify-center">
+        <Loader2 className="w-10 h-10 animate-spin" />
+        <h2 className="text-primary-dark text-2xl font-bold">
+          Cargando jugadores...
+        </h2>
+      </section>
+
       <section className="container px-4 md:px-6 py-8 mx-auto">
         {/* Grid de jugadores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <CardPlayerSkeleton />
+          <CardPlayerSkeleton />
           <CardPlayerSkeleton />
           <CardPlayerSkeleton />
           <CardPlayerSkeleton />

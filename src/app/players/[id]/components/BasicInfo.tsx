@@ -50,8 +50,8 @@ const BasicInfo = ({
 
       <CardContent className="p-6">
         {/* Información básica */}
-        <div className="flex flex-col md:flex-row gap-6">
-          <div>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <div className="flex justify-center items-center">
             {image ? (
               <Image
                 src={image || "/placeholder.svg"}

@@ -6,7 +6,7 @@ export const Filter = ({
   setFilter: (filter: string) => void;
 }) => {
   return (
-    <div className="container px-4 md:px-6 py-8 mx-auto">
+    <div className="container p-6 mx-auto max-w-2xl">
       <div className="flex flex-col gap-4">
         <h1 className="text-primary-dark font-bold">Filtrar por posición</h1>
 
